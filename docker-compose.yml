@@ -1,0 +1,91 @@
+version: '3'
+services:
+  mongodb-cfg-1:
+    image: mongo:3
+    expose:
+      - 27019
+    volumes:
+      - ./configdb:/app/configdb
+    command: "mongod --config '/app/configdb/mongodb_cfg.conf'"
+    links:
+      - mongodb-router
+      - mongodb-1
+      - mongodb-cfg-2
+      - mongodb-cfg-3
+  mongodb-cfg-2:
+    image: mongo:3
+    expose:
+      - 27019
+    volumes:
+      - ./configdb:/app/configdb
+    command: "mongod --config '/app/configdb/mongodb_cfg.conf'"
+    links:
+      - mongodb-router
+      - mongodb-1
+  mongodb-cfg-3:
+    image: mongo:3
+    expose:
+      - 27019
+    volumes:
+      - ./configdb:/app/configdb
+    command: "mongod --config '/app/configdb/mongodb_cfg.conf'"
+    links:
+      - mongodb-router
+      - mongodb-1
+  mongodb-1:
+    image: mongo:3
+    expose:
+      - 27018
+    links:
+      - mongodb-2
+      - mongodb-3
+    volumes:
+      - ./configdb:/app/configdb
+    command: "mongod --config '/app/configdb/mongodb.conf'"
+  mongodb-2:
+    image: mongo:3
+    expose:
+      - 27018
+    # links:
+    #   - mongos
+    volumes:
+      - ./configdb:/app/configdb
+    command: "mongod --config '/app/configdb/mongodb.conf'"
+  mongodb-3:
+    image: mongo:3
+    expose:
+      - 27018
+    # links:
+    #   - mongos
+    volumes:
+      - ./configdb:/app/configdb
+    command: "mongod --config '/app/configdb/mongodb.conf'"
+  mongodb-router:
+    image: mongo:3
+    expose:
+      - 27017
+    # links:
+    #   - mongos
+    volumes:
+        - ./configdb:/app/configdb
+    command: "mongos --config '/app/configdb/mongodb_routes.conf'"
+  web:
+    build: .
+    # command: ./script/start
+    volumes:
+      - .:/app
+      - box:/box
+    links:
+      - mongodb-router
+    ports:
+      - "3000:3000"
+    environment:
+      BUNDLE_PATH: /box
+  box:
+    image: busybox
+    volumes:
+      - /box
+
+volumes:
+  box:
+    driver: local
