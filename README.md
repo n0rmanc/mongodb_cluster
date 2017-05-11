@@ -2,7 +2,7 @@
 mongo --host mongodb-cfg-1 --port 27018
 
 
-# init mongodb config server 
+# init mongodb config server
 ```
 mongo --host mongodb-cfg-1 --port 27019
 ```
@@ -39,4 +39,14 @@ rs.initiate(
   }
 )
 ```
+
+
+# Add shards to mongos
+```
 mongo --host mongodb-router --port 27017
+```
+```
+sh.addShard( "mongos/mongodb-1:27018");
+sh.addShard( "mongos/mongodb-2:27018");
+sh.addShard( "mongos/mongodb-3:27018");
+```
