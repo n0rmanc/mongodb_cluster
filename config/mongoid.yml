@@ -9,7 +9,9 @@ development:
       # Provides the hosts the default session can connect to. Must be an array
       # of host:port pairs. (required)
       hosts:
-        - mongo_master:27017
+        # - mongodb-3:27018
+        - mongodb-router_1:27017
+        - mongodb-router_2:27017
       options:
         # Change the default write concern. (default = { w: 1 })
         # write:
@@ -18,7 +20,7 @@ development:
         # Change the default consistency model to primary, secondary.
         # 'secondary' will send reads to secondaries, 'primary' sends everything
         # to master. (default: primary)
-        # read: secondary_preferred
+        read: secondary
 
         # How many times Moped should attempt to retry an operation after
         # failure. (default: The number of nodes in the cluster)
