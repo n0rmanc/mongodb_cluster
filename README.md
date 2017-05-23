@@ -10,7 +10,7 @@ in the mogo shell
 ```
 rs.initiate(
   {
-    _id: "mongos",
+    _id: "mongodbcfg",
     configsvr: true,
     members: [
      { _id: 0, host: "mongodb-cfg-1:27019" },
@@ -30,7 +30,7 @@ in the mogo shell
 ```
 rs.initiate(
   {
-    _id : "mongos",
+    _id : "mongodbshard",
     members: [
       { _id : 0, host : "mongodb-1:27018" },
       { _id : 1, host : "mongodb-2:27018" },
@@ -46,7 +46,7 @@ rs.initiate(
 mongo --host mongodb-router --port 27017
 ```
 ```
-sh.addShard( "mongos/mongodb-1:27018");
-sh.addShard( "mongos/mongodb-2:27018");
-sh.addShard( "mongos/mongodb-3:27018");
+sh.addShard( "mongodbshard/mongodb-1:27018");
+sh.addShard( "mongodbshard/mongodb-2:27018");
+sh.addShard( "mongodbshard/mongodb-3:27018");
 ```
