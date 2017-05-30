@@ -1,12 +1,10 @@
-version: '3'
+version: '2'
 services:
   mongodb-cfg-1:
     image: mongo:3
     expose:
       - 27019
-    volumes:
-      - ./configdb:/app/configdb
-    command: "mongod --config '/app/configdb/mongodb_cfg.conf'"
+    command: "mongod --configsvr --replSet mongodbcfg"
     links:
       - mongodb-router
       - mongodb-1
@@ -16,9 +14,7 @@ services:
     image: mongo:3
     expose:
       - 27019
-    volumes:
-      - ./configdb:/app/configdb
-    command: "mongod --config '/app/configdb/mongodb_cfg.conf'"
+    command: "mongod --configsvr --replSet mongodbcfg"
     links:
       - mongodb-router
       - mongodb-1
@@ -26,9 +22,7 @@ services:
     image: mongo:3
     expose:
       - 27019
-    volumes:
-      - ./configdb:/app/configdb
-    command: "mongod --config '/app/configdb/mongodb_cfg.conf'"
+    command: "mongod --configsvr --replSet mongodbcfg"
     links:
       - mongodb-router
       - mongodb-1
@@ -39,53 +33,21 @@ services:
     links:
       - mongodb-2
       - mongodb-3
-    volumes:
-      - ./configdb:/app/configdb
-    command: "mongod --config '/app/configdb/mongodb.conf'"
+    command: "mongod --shardsvr --replSet mongodbshard"
   mongodb-2:
     image: mongo:3
     expose:
       - 27018
-    # links:
-    #   - mongos
-    volumes:
-      - ./configdb:/app/configdb
-    command: "mongod --config '/app/configdb/mongodb.conf'"
+    command: "mongod --shardsvr --replSet mongodbshard"
   mongodb-3:
     image: mongo:3
     expose:
       - 27018
-    # links:
-    #   - mongos
-    volumes:
-      - ./configdb:/app/configdb
-    command: "mongod --config '/app/configdb/mongodb.conf'"
+    command: "mongod --shardsvr --replSet mongodbshard"
   mongodb-router:
     image: mongo:3
     expose:
       - 27017
-    # links:
-    #   - mongos
-    volumes:
-        - ./configdb:/app/configdb
-    command: "mongos --config '/app/configdb/mongodb_routes.conf'"
-  web:
-    build: .
-    # command: ./script/start
-    volumes:
-      - .:/app
-      - box:/box
-    links:
-      - mongodb-router
-    ports:
-      - "3000:3000"
-    environment:
-      BUNDLE_PATH: /box
-  box:
-    image: busybox
-    volumes:
-      - /box
-
-volumes:
-  box:
-    driver: local
+    command: "mongos --configdb mongodbcfg/mongodb-cfg-1:27019,mongodb-cfg-2:27019,mongodb-cfg-3:27019"
+    labels:
+      kompose.service.type: LoadBalancer
