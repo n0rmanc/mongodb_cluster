@@ -34,16 +34,22 @@ services:
       - mongodb-2
       - mongodb-3
     command: "mongod --shardsvr --replSet mongodbshard"
+    volumes:
+      - ./mnt/data/mongo1:/data/db
   mongodb-2:
     image: mongo:3
     expose:
       - 27018
     command: "mongod --shardsvr --replSet mongodbshard"
+    volumes:
+      - ./mnt/data/mongo2:/data/db
   mongodb-3:
     image: mongo:3
     expose:
       - 27018
     command: "mongod --shardsvr --replSet mongodbshard"
+    volumes:
+      - ./mnt/data/mongo3:/data/db
   mongodb-router:
     image: mongo:3
     expose:
