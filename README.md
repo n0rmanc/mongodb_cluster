@@ -47,6 +47,4 @@ mongo --host mongodb-router --port 27017
 ```
 ```
 sh.addShard( "mongodbshard/mongodb-1:27018");
-sh.addShard( "mongodbshard/mongodb-2:27018");
-sh.addShard( "mongodbshard/mongodb-3:27018");
 ```

@@ -53,7 +53,7 @@ services:
   mongodb-router:
     image: mongo:3
     ports:
-      - 27017
+      - 27017:27017
     command: "mongos --configdb mongodbcfg/mongodb-cfg-1:27019,mongodb-cfg-2:27019,mongodb-cfg-3:27019"
     labels:
       kompose.service.type: LoadBalancer
