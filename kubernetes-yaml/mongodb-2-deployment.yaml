@@ -20,7 +20,7 @@ spec:
         - mongod
         - --shardsvr
         - --replSet
-        - mongodbshard
+        - mongodbshard-1
         image: mongo:3
         name: mongodb-2
         resources:
@@ -33,9 +33,6 @@ spec:
       restartPolicy: Always
       volumes:
       - name: mongodb-2-disk
-        # hostPath:
-        #   # directory location on host
-        #   path: /mnt/data/mongo2
         gcePersistentDisk:
           pdName: mongodb-2
           fsType: ext4

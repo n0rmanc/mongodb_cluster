@@ -23,13 +23,5 @@ spec:
         image: mongo:3
         name: mongodb-cfg-1
         resources: {}
-        # volumeMounts:
-        # - mountPath: /download/temp
-        #   name: staging-temp-2
       restartPolicy: Always
-      # volumes:
-      # - name: staging-temp-2
-      #   gcePersistentDisk:
-      #     pdName: staging-temp-2
-      #     fsType: ext4
 status: {}

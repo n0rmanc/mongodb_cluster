@@ -20,7 +20,7 @@ spec:
         - mongod
         - --shardsvr
         - --replSet
-        - mongodbshard
+        - mongodbshard-1
         image: mongo:3
         resources:
           requests:
@@ -30,19 +30,10 @@ spec:
         volumeMounts:
         - mountPath: /data/db
           name: mongodb-1-disk
-        # - mountPath: /download/temp
-        #   name: staging-temp
       restartPolicy: Always
       volumes:
       - name: mongodb-1-disk
-        # hostPath:
-        #   # directory location on host
-        #   path: /mnt/data/mongo1
         gcePersistentDisk:
           pdName: mongodb-1
           fsType: ext4
-      # - name: staging-temp
-      #   gcePersistentDisk:
-      #     pdName: staging-temp
-      #     fsType: ext4
 status: {}

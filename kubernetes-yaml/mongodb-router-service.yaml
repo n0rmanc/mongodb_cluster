@@ -1,17 +1,19 @@
 apiVersion: v1
 kind: Service
 metadata:
+  annotations:
+    kompose.service.type: LoadBalancer
   creationTimestamp: null
   labels:
     io.kompose.service: mongodb-router
   name: mongodb-router
 spec:
-  clusterIP: None
   ports:
-  - name: headless
-    port: 55555
-    targetPort: 0
+  - name: "27017"
+    port: 27017
+    targetPort: 27017
   selector:
     io.kompose.service: mongodb-router
+  type: LoadBalancer
 status:
   loadBalancer: {}

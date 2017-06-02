@@ -23,16 +23,5 @@ spec:
         image: mongo:3
         name: mongodb-cfg-3
         resources: {}
-        # volumeMounts:
-        # - mountPath: /data/db
-        #   name: mongodb-cfg-3-disk
       restartPolicy: Always
-      # volumes:
-      # - name: mongodb-cfg-3-disk
-      #   # hostPath:
-      #   #   # directory location on host
-      #     # path: /mnt/data/mongo-cfg-3
-      #   gcePersistentDisk:
-      #     pdName: mongodb-cfg-3
-      #     fsType: ext4
 status: {}

@@ -3,8 +3,8 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    io.kompose.service: mongodb-3
-  name: mongodb-3
+    io.kompose.service: mongodb-6
+  name: mongodb-6
 spec:
   replicas: 1
   strategy:
@@ -13,27 +13,24 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        io.kompose.service: mongodb-3
+        io.kompose.service: mongodb-6
     spec:
       containers:
       - args:
         - mongod
         - --shardsvr
         - --replSet
-        - mongodbshard-1
+        - mongodbshard-2
         image: mongo:3
-        resources:
-          requests:
-            memory: 8Gi
-        name: mongodb-3
+        name: mongodb-6
         resources: {}
         volumeMounts:
         - mountPath: /data/db
-          name: mongodb-3-disk
+          name: mongodb-6-disk
       restartPolicy: Always
       volumes:
-      - name: mongodb-3-disk
+      - name: mongodb-6-disk
         gcePersistentDisk:
-          pdName: mongodb-3
+          pdName: mongodb-6
           fsType: ext4
 status: {}
