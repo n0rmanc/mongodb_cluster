@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mongodb-cfg-2
+  name: mongodb-cfg-2
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: mongodb-cfg-2
+    spec:
+      containers:
+      - args:
+        - mongod
+        - --configsvr
+        - --replSet
+        - mongodbcfg
+        image: mongo:3
+        name: mongodb-cfg-2
+        resources: {}
+        # volumeMounts:
+        # - mountPath: /download/temp
+        #   name: staging-temp-2
+      restartPolicy: Always
+      # volumes:
+      # - name: staging-temp-2
+      #   gcePersistentDisk:
+      #     pdName: staging-temp-2
+      #     fsType: ext4
+status: {}

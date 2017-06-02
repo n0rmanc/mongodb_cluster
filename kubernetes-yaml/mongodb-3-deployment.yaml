@@ -1,0 +1,42 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mongodb-3
+  name: mongodb-3
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: mongodb-3
+    spec:
+      containers:
+      - args:
+        - mongod
+        - --shardsvr
+        - --replSet
+        - mongodbshard
+        image: mongo:3
+        resources:
+          requests:
+            memory: 8Gi
+        name: mongodb-3
+        resources: {}
+        volumeMounts:
+        - mountPath: /data/db
+          name: mongodb-3-disk
+      restartPolicy: Always
+      volumes:
+      - name: mongodb-3-disk
+        # hostPath:
+        #   # directory location on host
+        #   path: /mnt/data/mongo3
+        gcePersistentDisk:
+          pdName: mongodb-3
+          fsType: ext4
+status: {}

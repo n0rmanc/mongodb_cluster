@@ -1,0 +1,48 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mongodb-1
+  name: mongodb-1
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: mongodb-1
+    spec:
+      containers:
+      - args:
+        - mongod
+        - --shardsvr
+        - --replSet
+        - mongodbshard
+        image: mongo:3
+        resources:
+          requests:
+            memory: 8Gi
+        name: mongodb-1
+        resources: {}
+        volumeMounts:
+        - mountPath: /data/db
+          name: mongodb-1-disk
+        # - mountPath: /download/temp
+        #   name: staging-temp
+      restartPolicy: Always
+      volumes:
+      - name: mongodb-1-disk
+        # hostPath:
+        #   # directory location on host
+        #   path: /mnt/data/mongo1
+        gcePersistentDisk:
+          pdName: mongodb-1
+          fsType: ext4
+      # - name: staging-temp
+      #   gcePersistentDisk:
+      #     pdName: staging-temp
+      #     fsType: ext4
+status: {}
