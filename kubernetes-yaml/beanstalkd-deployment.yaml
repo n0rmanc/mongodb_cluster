@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: beanstalkd
+  name: beanstalkd
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: beanstalkd
+    spec:
+      containers:
+      - image: schickling/beanstalkd
+        name: beanstalkd
+        resources: {}
+      restartPolicy: Always
+status: {}

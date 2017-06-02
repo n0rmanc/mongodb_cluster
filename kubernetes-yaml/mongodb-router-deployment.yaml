@@ -1,8 +1,6 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  annotations:
-    kompose.service.type: LoadBalancer
   creationTimestamp: null
   labels:
     io.kompose.service: mongodb-router
@@ -24,16 +22,5 @@ spec:
         image: mongo:3
         name: mongodb-router
         resources: {}
-        # volumeMounts:
-        # - mountPath: /data/db
-        #   name: mongodb-router-disk
       restartPolicy: Always
-      volumes:
-      # - name: mongodb-router-disk
-        # hostPath:
-        #   # directory location on host
-        #   path: /mnt/data/mongo-router
-        # gcePersistentDisk:
-        #   pdName: mongodb-router
-        #   fsType: ext4
 status: {}

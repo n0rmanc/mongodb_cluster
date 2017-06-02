@@ -3,8 +3,8 @@ kind: Service
 metadata:
   creationTimestamp: null
   labels:
-    io.kompose.service: mongodb-router
-  name: mongodb-router
+    io.kompose.service: redis
+  name: redis
 spec:
   clusterIP: None
   ports:
@@ -12,6 +12,6 @@ spec:
     port: 55555
     targetPort: 0
   selector:
-    io.kompose.service: mongodb-router
+    io.kompose.service: redis
 status:
   loadBalancer: {}
