@@ -1,8 +1,6 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  annotations:
-    kompose.service.type: LoadBalancer
   creationTimestamp: null
   labels:
     io.kompose.service: mongodb-router
