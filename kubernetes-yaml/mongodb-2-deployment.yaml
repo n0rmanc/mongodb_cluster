@@ -28,7 +28,7 @@ spec:
             memory: 8Gi
         resources: 
           limits:
-            memory: 7Gi
+            memory: 9Gi
         volumeMounts:
         - mountPath: /data/db
           name: mongodb-2-disk
