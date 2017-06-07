@@ -10,6 +10,7 @@ services:
       - mongodb-1
       - mongodb-cfg-2
       - mongodb-cfg-3
+      mem_limit: 5G
     networks:
       shopline:
   mongodb-cfg-2:
@@ -20,6 +21,7 @@ services:
     links:
       - mongodb-router
       - mongodb-1
+      mem_limit: 5G
     networks:
       shopline:
   mongodb-cfg-3:
@@ -30,6 +32,7 @@ services:
     links:
       - mongodb-router
       - mongodb-1
+      mem_limit: 5G
     networks:
       shopline:
   mongodb-1:
@@ -39,6 +42,7 @@ services:
     command: "mongod --shardsvr --replSet mongodbshard-1"
     volumes:
       - ./mnt/data/mongo1:/data/db
+      mem_limit: 5G
     networks:
       shopline:
   mongodb-2:
@@ -48,6 +52,7 @@ services:
     command: "mongod --shardsvr --replSet mongodbshard-1"
     volumes:
       - ./mnt/data/mongo2:/data/db
+      mem_limit: 5G
     networks:
       shopline:
   mongodb-3:
@@ -57,6 +62,7 @@ services:
     command: "mongod --shardsvr --replSet mongodbshard-1"
     volumes:
       - ./mnt/data/mongo3:/data/db
+      mem_limit: 5G
     networks:
       shopline:
   mongodb-4:
@@ -66,6 +72,7 @@ services:
     command: "mongod --shardsvr --replSet mongodbshard-2"
     volumes:
       - ./mnt/data/mongo4:/data/db
+      mem_limit: 5G
     networks:
       shopline:
   mongodb-5:
@@ -75,6 +82,7 @@ services:
     command: "mongod --shardsvr --replSet mongodbshard-2"
     volumes:
       - ./mnt/data/mongo5:/data/db
+      mem_limit: 5G
     networks:
       shopline:
   mongodb-6:
@@ -84,6 +92,7 @@ services:
     command: "mongod --shardsvr --replSet mongodbshard-2"
     volumes:
       - ./mnt/data/mongo6:/data/db
+      mem_limit: 5G
     networks:
       shopline:
   mongodb-router:
@@ -91,6 +100,7 @@ services:
     ports:
       - 27017:27017
     command: "mongos --configdb mongodbcfg/mongodb-cfg-1:27019,mongodb-cfg-2:27019,mongodb-cfg-3:27019"
+    mem_limit: 5G
     networks:
       shopline:
         aliases:
