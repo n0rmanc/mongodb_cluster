@@ -26,7 +26,9 @@ spec:
           requests:
             memory: 8Gi
         name: mongodb-3
-        resources: {}
+        resources:
+          limits:
+            memory: 9Gi
         volumeMounts:
         - mountPath: /data/db
           name: mongodb-3-disk

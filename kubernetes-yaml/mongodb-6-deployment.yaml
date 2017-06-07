@@ -23,7 +23,9 @@ spec:
         - mongodbshard-2
         image: mongo:3
         name: mongodb-6
-        resources: {}
+        resources:
+          limits:
+            memory: 9Gi
         volumeMounts:
         - mountPath: /data/db
           name: mongodb-6-disk
