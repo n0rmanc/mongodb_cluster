@@ -10,7 +10,7 @@ services:
       - mongodb-1
       - mongodb-cfg-2
       - mongodb-cfg-3
-    mem_limit: 7G
+    mem_limit: 9G
     restart: always
     networks:
       shopline:
@@ -22,7 +22,7 @@ services:
     links:
       - mongodb-router
       - mongodb-1
-    mem_limit: 7G
+    mem_limit: 9G
     restart: always
     networks:
       shopline:
@@ -34,7 +34,7 @@ services:
     links:
       - mongodb-router
       - mongodb-1
-    mem_limit: 7G
+    mem_limit: 9G
     restart: always
     networks:
       shopline:
@@ -45,7 +45,7 @@ services:
     command: "mongod --shardsvr --replSet mongodbshard-1"
     volumes:
       - ./mnt/data/mongo1:/data/db
-    mem_limit: 7G
+    mem_limit: 9G
     restart: always
     networks:
       shopline:
@@ -56,7 +56,7 @@ services:
     command: "mongod --shardsvr --replSet mongodbshard-1"
     volumes:
       - ./mnt/data/mongo2:/data/db
-    mem_limit: 7G
+    mem_limit: 9G
     restart: always
     networks:
       shopline:
@@ -67,7 +67,7 @@ services:
     command: "mongod --shardsvr --replSet mongodbshard-1"
     volumes:
       - ./mnt/data/mongo3:/data/db
-    mem_limit: 7G
+    mem_limit: 9G
     restart: always
     networks:
       shopline:
@@ -78,7 +78,7 @@ services:
     command: "mongod --shardsvr --replSet mongodbshard-2"
     volumes:
       - ./mnt/data/mongo4:/data/db
-    mem_limit: 7G
+    mem_limit: 9G
     restart: always
     networks:
       shopline:
@@ -89,7 +89,7 @@ services:
     command: "mongod --shardsvr --replSet mongodbshard-2"
     volumes:
       - ./mnt/data/mongo5:/data/db
-    mem_limit: 7G
+    mem_limit: 9G
     restart: always
     networks:
       shopline:
@@ -100,7 +100,7 @@ services:
     command: "mongod --shardsvr --replSet mongodbshard-2"
     volumes:
       - ./mnt/data/mongo6:/data/db
-    mem_limit: 7G
+    mem_limit: 9G
     restart: always
     networks:
       shopline:
@@ -109,7 +109,7 @@ services:
     ports:
       - 27017:27017
     command: "mongos --configdb mongodbcfg/mongodb-cfg-1:27019,mongodb-cfg-2:27019,mongodb-cfg-3:27019"
-    mem_limit: 7G
+    mem_limit: 9G
     restart: always
     networks:
       shopline:
