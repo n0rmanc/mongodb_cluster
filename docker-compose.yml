@@ -115,8 +115,8 @@ services:
       shopline:
         aliases:
           - dev-mongo
-    labels:
-      kompose.service.type: LoadBalancer
+    # labels:
+    #   kompose.service.type: LoadBalancer
 
 networks:
   shopline:
