@@ -20,8 +20,22 @@ spec:
         - --configsvr
         - --replSet
         - mongodbcfg
+        - --wiredTigerCacheSizeGB
+        - "8"
         image: mongo:3
         name: mongodb-cfg-2
-        resources: {}
+        resources:
+          requests:
+            memory: '2Gi'
+          limits:
+            memory: "9663676416"
+        volumeMounts:
+        - mountPath: /data
+          name: mongodb-cfg-2-disk
       restartPolicy: Always
+      volumes:
+      - name: mongodb-cfg-2-disk
+        gcePersistentDisk:
+          pdName: mongodb-cfg-2
+          fsType: ext4
 status: {}

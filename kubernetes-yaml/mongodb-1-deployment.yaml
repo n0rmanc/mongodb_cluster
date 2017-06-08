@@ -21,14 +21,15 @@ spec:
         - --shardsvr
         - --replSet
         - mongodbshard-1
+        - --wiredTigerCacheSizeGB
+        - "8"
         image: mongo:3
-        resources:
-          requests:
-            memory: 8Gi
         name: mongodb-1
         resources:
+          requests:
+            memory: '2Gi'
           limits:
-            memory: 9Gi
+            memory: "9663676416"
         volumeMounts:
         - mountPath: /data/db
           name: mongodb-1-disk
