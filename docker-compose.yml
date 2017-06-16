@@ -1,26 +1,31 @@
 version: '2'
 services:
   mongodb-cfg-1:
-    image: mongo:3
+    image: mongo:3.0.7
     expose:
       - 27019
-    command: "mongod --configsvr --replSet mongodbcfg --wiredTigerCacheSizeGB 8"
+    command: "mongod --configsvr --replSet mongodbcfg --wiredTigerCacheSizeGB 5"
     mem_limit: 9G
     restart: always
+    volumes:
+      - ./mnt/data/mongo-cfg-1:/data
     links:
       - mongodb-router
       - mongodb-1
       - mongodb-cfg-2
       - mongodb-cfg-3
+
     networks:
       shopline:
   mongodb-cfg-2:
     image: mongo:3
     expose:
       - 27019
-    command: "mongod --configsvr --replSet mongodbcfg --wiredTigerCacheSizeGB 8"
+    command: "mongod --configsvr --replSet mongodbcfg --wiredTigerCacheSizeGB 5"
     mem_limit: 9G
     restart: always
+    volumes:
+      - ./mnt/data/mongo-cfg-2:/data
     links:
       - mongodb-router
       - mongodb-1
@@ -30,9 +35,11 @@ services:
     image: mongo:3
     expose:
       - 27019
-    command: "mongod --configsvr --replSet mongodbcfg --wiredTigerCacheSizeGB 8"
+    command: "mongod --configsvr --replSet mongodbcfg --wiredTigerCacheSizeGB 5"
     mem_limit: 9G
     restart: always
+    volumes:
+      - ./mnt/data/mongo-cfg-3:/data
     links:
       - mongodb-router
       - mongodb-1
@@ -42,66 +49,66 @@ services:
     image: mongo:3
     expose:
       - 27018
-    command: "mongod --shardsvr --replSet mongodbshard-1 --wiredTigerCacheSizeGB 8"
+    command: "mongod --shardsvr --replSet mongodbshard-1 --wiredTigerCacheSizeGB 5"
     mem_limit: 9G
     restart: always
     volumes:
-      - ./mnt/data/mongo1:/data/db
+      - ./mnt/data/mongo1:/data
     networks:
       shopline:
   mongodb-2:
     image: mongo:3
     expose:
       - 27018
-    command: "mongod --shardsvr --replSet mongodbshard-1 --wiredTigerCacheSizeGB 8"
+    command: "mongod --shardsvr --replSet mongodbshard-1 --wiredTigerCacheSizeGB 5"
     mem_limit: 9G
     restart: always
     volumes:
-      - ./mnt/data/mongo2:/data/db
+      - ./mnt/data/mongo2:/data
     networks:
       shopline:
   mongodb-3:
     image: mongo:3
     expose:
       - 27018
-    command: "mongod --shardsvr --replSet mongodbshard-1 --wiredTigerCacheSizeGB 8"
+    command: "mongod --shardsvr --replSet mongodbshard-1 --wiredTigerCacheSizeGB 5"
     mem_limit: 9G
     restart: always
     volumes:
-      - ./mnt/data/mongo3:/data/db
+      - ./mnt/data/mongo3:/data
     networks:
       shopline:
   mongodb-4:
     image: mongo:3
     expose:
       - 27018
-    command: "mongod --shardsvr --replSet mongodbshard-2 --wiredTigerCacheSizeGB 8"
+    command: "mongod --shardsvr --replSet mongodbshard-2 --wiredTigerCacheSizeGB 5"
     mem_limit: 9G
     restart: always
     volumes:
-      - ./mnt/data/mongo4:/data/db
+      - ./mnt/data/mongo4:/data
     networks:
       shopline:
   mongodb-5:
     image: mongo:3
     expose:
       - 27018
-    command: "mongod --shardsvr --replSet mongodbshard-2 --wiredTigerCacheSizeGB 8"
+    command: "mongod --shardsvr --replSet mongodbshard-2 --wiredTigerCacheSizeGB 5"
     mem_limit: 9G
     restart: always
     volumes:
-      - ./mnt/data/mongo5:/data/db
+      - ./mnt/data/mongo5:/data
     networks:
       shopline:
   mongodb-6:
     image: mongo:3
     expose:
       - 27018
-    command: "mongod --shardsvr --replSet mongodbshard-2 --wiredTigerCacheSizeGB 8"
+    command: "mongod --shardsvr --replSet mongodbshard-2 --wiredTigerCacheSizeGB 5"
     mem_limit: 9G
     restart: always
     volumes:
-      - ./mnt/data/mongo6:/data/db
+      - ./mnt/data/mongo6:/data
     networks:
       shopline:
   mongodb-router:
@@ -111,12 +118,14 @@ services:
     command: "mongos --configdb mongodbcfg/mongodb-cfg-1:27019,mongodb-cfg-2:27019,mongodb-cfg-3:27019"
     mem_limit: 9G
     restart: always
+    volumes:
+      - ./mnt/data/mongo-router:/data
     networks:
       shopline:
         aliases:
           - dev-mongo
-    # labels:
-    #   kompose.service.type: LoadBalancer
+    labels:
+      kompose.service.type: LoadBalancer
 
 networks:
   shopline:
