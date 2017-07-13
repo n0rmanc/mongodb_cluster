@@ -8,7 +8,8 @@ services:
     mem_limit: 9G
     restart: always
     volumes:
-      - ./mnt/data/mongo-cfg-1:/data
+      - ./mnt/data/mongo-cfg-1:/data/db
+      - ./mnt/configdb/mongo-cfg-1:/data/configdb
     links:
       - mongodb-router
       - mongodb-1
@@ -25,7 +26,8 @@ services:
     mem_limit: 9G
     restart: always
     volumes:
-      - ./mnt/data/mongo-cfg-2:/data
+      - ./mnt/data/mongo-cfg-2:/data/db
+      - ./mnt/configdb/mongo-cfg-2:/data/configdb
     links:
       - mongodb-router
       - mongodb-1
@@ -39,7 +41,8 @@ services:
     mem_limit: 9G
     restart: always
     volumes:
-      - ./mnt/data/mongo-cfg-3:/data
+      - ./mnt/data/mongo-cfg-3:/data/db
+      - ./mnt/configdb/mongo-cfg-3:/data/configdb
     links:
       - mongodb-router
       - mongodb-1
@@ -53,7 +56,8 @@ services:
     mem_limit: 9G
     restart: always
     volumes:
-      - ./mnt/data/mongo1:/data
+      - ./mnt/data/mongo1:/data/db
+      - ./mnt/configdb/mongo1:/data/configdb
     networks:
       shopline:
   mongodb-2:
@@ -64,7 +68,8 @@ services:
     mem_limit: 9G
     restart: always
     volumes:
-      - ./mnt/data/mongo2:/data
+      - ./mnt/data/mongo2:/data/db
+      - ./mnt/configdb/mongo2:/data/configdb
     networks:
       shopline:
   mongodb-3:
@@ -75,7 +80,8 @@ services:
     mem_limit: 9G
     restart: always
     volumes:
-      - ./mnt/data/mongo3:/data
+      - ./mnt/data/mongo3:/data/db
+      - ./mnt/configdb/mongo3:/data/configdb
     networks:
       shopline:
   mongodb-4:
@@ -86,7 +92,8 @@ services:
     mem_limit: 9G
     restart: always
     volumes:
-      - ./mnt/data/mongo4:/data
+      - ./mnt/data/mongo4:/data/db
+      - ./mnt/configdb/mongo4:/data/configdb
     networks:
       shopline:
   mongodb-5:
@@ -97,7 +104,8 @@ services:
     mem_limit: 9G
     restart: always
     volumes:
-      - ./mnt/data/mongo5:/data
+      - ./mnt/data/mongo5:/data/db
+      - ./mnt/configdb/mongo5:/data/configdb
     networks:
       shopline:
   mongodb-6:
@@ -108,7 +116,8 @@ services:
     mem_limit: 9G
     restart: always
     volumes:
-      - ./mnt/data/mongo6:/data
+      - ./mnt/data/mongo6:/data/db
+      - ./mnt/configdb/mongo6:/data/configdb
     networks:
       shopline:
   mongodb-router:
@@ -119,7 +128,8 @@ services:
     mem_limit: 9G
     restart: always
     volumes:
-      - ./mnt/data/mongo-router:/data
+      - ./mnt/data/mongo-router:/data/db
+      - ./mnt/configdb/mongo-router:/data/configdb
     networks:
       shopline:
         aliases:
