@@ -1,7 +1,7 @@
 version: '2'
 services:
   mongodb-cfg-1:
-    image: mongo:3.0.7
+    image: mongo:3
     expose:
       - 27019
     command: "mongod --configsvr --replSet mongodbcfg --wiredTigerCacheSizeGB 5"
