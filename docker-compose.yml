@@ -136,6 +136,12 @@ services:
           - dev-mongo
     labels:
       kompose.service.type: LoadBalancer
-
+  redis:
+    image: redis
+    port:
+      - 6543:6543
+    restart: always
+    volumes:
+      - ./mnt/data/redis:/data
 networks:
   shopline:
