@@ -137,7 +137,7 @@ services:
     labels:
       kompose.service.type: LoadBalancer
   redis:
-    image: redis
+    image: redis:3.2-alpine
     port:
       - 6543:6543
     restart: always
