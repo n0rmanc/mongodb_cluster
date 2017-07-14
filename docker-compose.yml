@@ -14,7 +14,7 @@ services:
       - mongodb-router
       - mongodb-1
       - mongodb-cfg-2
-      - mongodb-cfg-3
+      # - mongodb-cfg-3
 
     networks:
       shopline:
